@@ -19,50 +19,52 @@
       <h1>Parlay Probability Calculator</h1>
     </header>
     <article id="legs" class="g-0 col-12 row justify-content-around mt-4 px-5">
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 1</h2>
         <form id="leg1Form">
           <div class="form-group">
             <label for="leg1Use">In Use:</label>
             <select class="form-control" id="leg1Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg1PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg1PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg1StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg1StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg1StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg1StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg1Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg1Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg1FormAfterUse">
+            <div class="form-group">
+              <label for="leg1PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg1PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg1StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg1StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg1StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg1StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg1Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg1Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg1ResultBtn">
@@ -71,52 +73,54 @@
         <div class="text-center card my-3 text-bg-light" id="leg1Result">
           Result
         </div>
-      </div>
+      </section>
 
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 2</h2>
         <form id="leg2Form">
           <div class="form-group">
             <label for="leg2Use">In Use:</label>
             <select class="form-control" id="leg2Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg2PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg2PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg2StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg2StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg2StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg2StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg2Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg2Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg2FormAfterUse">
+            <div class="form-group">
+              <label for="leg2PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg2PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg2StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg2StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg2StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg2StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg2Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg2Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg2ResultBtn">
@@ -125,52 +129,54 @@
         <div class="text-center card my-3 text-bg-light" id="leg2Result">
           Result
         </div>
-      </div>
+      </section>
 
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 3</h2>
         <form id="leg3Form">
           <div class="form-group">
             <label for="leg3Use">In Use:</label>
             <select class="form-control" id="leg3Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg3PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg3PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg3StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg3StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg3StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg3StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg3Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg3Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg3FormAfterUse">
+            <div class="form-group">
+              <label for="leg3PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg3PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg3StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg3StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg3StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg3StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg3Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg3Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg3ResultBtn">
@@ -179,52 +185,54 @@
         <div class="text-center card my-3 text-bg-light" id="leg3Result">
           Result
         </div>
-      </div>
+      </section>
 
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 4</h2>
         <form id="leg4Form">
           <div class="form-group">
             <label for="leg4Use">In Use:</label>
             <select class="form-control" id="leg4Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg4PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg4PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg4StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg4StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg4StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg4StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg4Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg4Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg4FormAfterUse">
+            <div class="form-group">
+              <label for="leg4PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg4PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg4StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg4StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg4StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg4StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg4Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg4Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg4ResultBtn">
@@ -233,52 +241,54 @@
         <div class="text-center card my-3 text-bg-light" id="leg4Result">
           Result
         </div>
-      </div>
+      </section>
 
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 5</h2>
         <form id="leg5Form">
           <div class="form-group">
             <label for="leg5Use">In Use:</label>
             <select class="form-control" id="leg5Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg5PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg5PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg5StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg5StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg5StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg5StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg5Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg5Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg5FormAfterUse">
+            <div class="form-group">
+              <label for="leg5PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg5PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg5StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg5StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg5StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg5StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg5Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg5Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg5ResultBtn">
@@ -287,52 +297,54 @@
         <div class="text-center card my-3 text-bg-light" id="leg5Result">
           Result
         </div>
-      </div>
+      </section>
 
-      <div class="col-2 card px-3 pt-2">
+      <section class="col-2 card px-3 pt-2">
         <h2 class="text-center">Leg 6</h2>
         <form id="leg6Form">
           <div class="form-group">
             <label for="leg6Use">In Use:</label>
             <select class="form-control" id="leg6Use" required>
-              <option value="yesuse">Yes</option>
-              <option value="nouse">No</option>
+              <option value="yesUse">Yes</option>
+              <option value="noUse">No</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="leg6PlayerName" class="pt-3">Player Name:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="leg6PlayerName"
-              placeholder="Michael Jordan"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg6StatCategory" class="pt-3">Stat:</label>
-            <select class="form-control" id="leg6StatCategory" required>
-              <option value="points">Points</option>
-              <option value="rebounds">Rebounds</option>
-              <option value="assists">Turnovers</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="leg6StatValue" class="pt-3">Stat Value:</label>
-            <input
-              type="number"
-              class="form-control"
-              id="leg6StatValue"
-              placeholder="100"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="leg6Comparison" class="pt-3">Over/Under:</label>
-            <select class="form-control" id="leg6Comparison" required>
-              <option value="over">Over</option>
-              <option value="under">Under</option>
-            </select>
+          <div id="leg6FormAfterUse">
+            <div class="form-group">
+              <label for="leg6PlayerName" class="pt-3">Player Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leg6PlayerName"
+                placeholder="Michael Jordan"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg6StatCategory" class="pt-3">Stat:</label>
+              <select class="form-control" id="leg6StatCategory" required>
+                <option value="points">Points</option>
+                <option value="rebounds">Rebounds</option>
+                <option value="assists">Turnovers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leg6StatValue" class="pt-3">Stat Value:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leg6StatValue"
+                placeholder="100"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="leg6Comparison" class="pt-3">Over/Under:</label>
+              <select class="form-control" id="leg6Comparison" required>
+                <option value="over">Over</option>
+                <option value="under">Under</option>
+              </select>
+            </div>
           </div>
         </form>
         <button type="button" class="mt-3 btn btn-primary" id="leg6ResultBtn">
@@ -341,7 +353,7 @@
         <div class="text-center card my-3 text-bg-light" id="leg6Result">
           Result
         </div>
-      </div>
+      </section>
     </article>
 
     <div class="g-0 col-12 row flex-column align-items-center text-center mt-5">
