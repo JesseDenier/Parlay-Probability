@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Links Bootstrap CSS. -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Links Custom CSS. -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Parlay Probability</title>
+  </head>
+  <body>
+    <div id="legs" class="col-12 row justify-content-around mt-5">
+      <div class="card">
+        <h2>Leg 1</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+        <div>Leg 1 Result</div>
+      </div>
+      <div class="card">
+        <h2>Leg 2</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Leg 3</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Leg 4</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Leg 5</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Leg 6</h2>
+        <form id="leg1Form">
+          <div class="form-group">
+            <label for="use">In Use:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="yesuse">Yes</option>
+              <option value="nouse">No</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="playerName">Player Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="playerName"
+              placeholder="Enter player's name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="statCategory">Stat:</label>
+            <select class="form-control" id="statCategory" required>
+              <option value="points">Points</option>
+              <option value="rebounds">Rebounds</option>
+              <option value="assists">Turnovers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="statValue">Stat Value:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="statValue"
+              placeholder="Enter stat value"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comparison">Over/Under:</label>
+            <select class="form-control" id="comparison" required>
+              <option value="over">Over</option>
+              <option value="under">Under</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row align-items-center flex-column m-5">
+      <button type="button" class="col-2 btn btn-primary">
+        Calculate Percentage
+      </button>
+      <div class="col-2 card text-center" id="result" class="mt-3">XX%</div>
+    </div>
+
+    <!-- Links JQuery JS. -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Links Bootstrap Popper JS. -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <!-- Links Bootstrap JS. -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Links Custom JS. -->
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
