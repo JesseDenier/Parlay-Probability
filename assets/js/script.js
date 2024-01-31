@@ -51,12 +51,14 @@ $(`#leg1PlayerName`).on("blur", function () {
     });
 });
 
+// Establises an empty array assigned to variable leg1PointsArray which can be filled with values.
+var leg1PointsArray = new Array();
+
 // Discovers PPG for the last 15 games of a specific player.
 // Note: The end_date= parameter did not work at all so seasons had to be used.
 // TODO: Parameters seasons= and playerid= are static and need to be dynamic based on current/past year, and user inputs.
 // TODO: Currently filtering out 0 point games but this may not be accurate. Chose to do so due to inaccurate 0 point games being returned by the API.
 $("#leg1StatCategory").on("blur", function () {
-  console.log("Leg 1 Stat Category Blurred");
   fetch(
     `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${playerId}`
   )
@@ -66,15 +68,18 @@ $("#leg1StatCategory").on("blur", function () {
     })
     // Logs the most recent 15 PPG for player to Console.
     .then(function (data) {
+      // Deletes any previous array held within.
+      leg1PointsArray = [];
       var games = data.data
         .filter((game) => game.pts !== null) // Filter out games with null points.
         .filter((game) => game.pts !== 0) // Filter out games with 0 points.
         .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
         .slice(0, 15); // Takes the first 15 games after sorting.
-
       //TODO: Understand how .forEach works vs a for loop.
-      games.forEach((game, index) => {
-        // All of this was necessary due to time zone issues causing date to appear as 1 day previous.
+      games.forEach(function (game, index) {
+        leg1PointsArray.push(game.pts);
+        //! All of this was necessary due to time zone issues causing date to appear as 1 day previous. It was only needed for testing if getting the most recent games was working. Leaving in in case it needs to be tested again.
+        /*
         var parsedDate = Date.parse(game.game.date);
         var date = new Date(parsedDate).toLocaleDateString(undefined, {
           year: "numeric",
@@ -82,11 +87,10 @@ $("#leg1StatCategory").on("blur", function () {
           day: "2-digit",
           timeZone: "UTC",
         });
-        var pointsScored = game.pts;
-        console.log(
-          `Game ${index + 1}: Date: ${date}, Points: ${pointsScored}`
-        );
+        console.log(`Game ${index + 1}: Date: ${date}, Points: ${game.pts}`);
+        */
       });
+      console.log(leg1PointsArray);
     });
 });
 
@@ -111,13 +115,19 @@ $("#leg1Comparison").on("blur", function () {
   console.log(`comparison is set to ${comparison}`);
 });
 
+// TODO: Currently the user is required to click in and out of stat: to make the array to compare to. This should be changed in case the user leaves it at default "points."
+// In the future should compare the leg1PointsArray to the compareValue based on comparison. The result of percent truthy should appear in leg1Result.
 $("#leg1ResultBtn").on("click", function () {
-  console.log("Leg 1 Result Button Clicked.");
   // Alerts the user if they haven't entered a player name.
   if (playerId === undefined) {
     alert("A player must be entered into Player Name.");
     return;
   }
+  leg1PointsArray.forEach(function () {
+    console.log(
+      "This is where each value in leg1PointsArray should be compared using comparison to compareValue, and the result of percent truthy should appear in leg1Result."
+    );
+  });
 });
 
 /*
