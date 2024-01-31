@@ -1,16 +1,3 @@
-// Placeholder JS for the function to calculate percent of legs.
-// TODO: Learn how the js knows which i value to use based on which leg you clicked. (This happens later as well.)
-for (let i = 1; i <= 6; i++) {
-  $(`#leg${i}ResultBtn`).on("click", function () {
-    $(`#leg${i}Result`).text("100%");
-  });
-}
-
-// Placeholder JS for the function to calculate total percent.
-$("#totalResultBtn").on("click", function () {
-  $("#totalResult").text("100%");
-});
-
 // Toggle visibility based on the "In Use" selection for each leg.
 for (let i = 1; i <= 6; i++) {
   $(`#leg${i}Use`).on("change", function () {
@@ -31,7 +18,6 @@ var playerId;
 
 // Discovers player ID by name inputed by user.
 $(`#leg1PlayerName`).on("blur", function () {
-  console.log("Leg 1 Player Name Blurred");
   // Converts user input into first and last name.
   var fullName = $(this).val();
   var words = fullName.split(" ");
@@ -56,7 +42,7 @@ $(`#leg1PlayerName`).on("blur", function () {
       if (data.data.length > 0) {
         playerId = data.data[0].id;
         console.log(
-          `var playerId is set to ${playerId} for ${firstName} ${lastName}.`
+          `playerId is set to ${playerId} for ${firstName} ${lastName}.`
         );
       } else {
         alert(`No player found for ${firstName} ${lastName}`);
@@ -103,3 +89,48 @@ $("#leg1StatCategory").on("blur", function () {
       });
     });
 });
+
+// Establishes compareValue as a variable that can be affected and called later. Sets it's default based on the default option of the HTML.
+var compareValue = $("#leg1StatValue").val();
+
+// Sets the value of compareValue to the user input in Stat Value.
+$("#leg1StatValue").on("blur", function () {
+  compareValue = $("#leg1StatValue").val();
+  console.log(`compareValue is set to ${compareValue}.`);
+});
+
+// Establises comparison as a variable that can be affected and called later. Sets it's default based on the default option of the HTML.
+var comparison = ">";
+
+$("#leg1Comparison").on("blur", function () {
+  if ($("#leg1Comparison").val() == "over") {
+    comparison = ">";
+  } else {
+    comparison = "<";
+  }
+  console.log(`comparison is set to ${comparison}`);
+});
+
+$("#leg1ResultBtn").on("click", function () {
+  console.log("Leg 1 Result Button Clicked.");
+  // Alerts the user if they haven't entered a player name.
+  if (playerId === undefined) {
+    alert("A player must be entered into Player Name.");
+    return;
+  }
+});
+
+/*
+// Placeholder JS for the function to calculate percent of legs.
+// TODO: Learn how the js knows which i value to use based on which leg you clicked. (This happens later as well.)
+for (let i = 1; i <= 6; i++) {
+  $(`#leg${i}ResultBtn`).on("click", function () {
+    $(`#leg${i}Result`).text("100%");
+  });
+}
+
+// Placeholder JS for the function to calculate total percent.
+$("#totalResultBtn").on("click", function () {
+  $("#totalResult").text("100%");
+});
+*/
