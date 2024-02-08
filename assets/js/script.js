@@ -1,7 +1,7 @@
 // Establishes default variables that can be changed later.
 let playerId;
 let compareValue;
-var leg1PointsArray = new Array();
+var leg1Array = [];
 
 // Toggle visibility based on the "In Use" selection for each leg.
 for (let i = 1; i <= 6; i++) {
@@ -45,7 +45,7 @@ function getPlayerId() {
         if (data.data.length > 0) {
           playerId = data.data[0].id;
           console.log(
-            `playerId is set to ${playerId} for ${firstName} ${lastName}.`
+            `The playerId is set to ${playerId} for ${firstName} ${lastName}.`
           );
         } else {
           alert(`No player found for ${firstName} ${lastName}`);
@@ -79,28 +79,42 @@ function getlast15games() {
       // Logs the most recent 15 PPG for player to Console.
       .then(function (data) {
         // Deletes any previous array held within.
-        leg1PointsArray = [];
-        var games = data.data
-          .filter((game) => game.pts !== null) // Filter out games with null points.
-          .filter((game) => game.pts !== 0) // Filter out games with 0 points.
-          .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
-          .slice(0, 15); // Takes the first 15 games after sorting.
-        //TODO: Understand how .forEach works vs a for loop.
-        games.forEach(function (game, index) {
-          leg1PointsArray.push(game.pts);
-          //! All of this was necessary due to time zone issues causing date to appear as 1 day previous. It was only needed for testing if getting the most recent games was working. Leaving in in case it needs to be tested again.
-          /*
-        var parsedDate = Date.parse(game.game.date);
-        var date = new Date(parsedDate).toLocaleDateString(undefined, {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-          timeZone: "UTC",
-        });
-        console.log(`Game ${index + 1}: Date: ${date}, Points: ${game.pts}`);
-        */
-        });
-        console.log(leg1PointsArray);
+        leg1Array = [];
+        if ($("#leg1StatCategory").val() === "points") {
+          var games = data.data
+            .filter((game) => game.pts !== null) // Filter out games with null points.
+            .filter((game) => game.pts !== 0) // Filter out games with 0 points.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            leg1Array.push(game.pts);
+          });
+          console.log("He got " + leg1Array + " points in his last 15 games.");
+        }
+        if ($("#leg1StatCategory").val() === "rebounds") {
+          var games = data.data
+            .filter((game) => game.reb !== null) // Filter out games with null rebounds.
+            .filter((game) => game.reb !== 0) // Filter out games with 0 rebounds.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            leg1Array.push(game.reb);
+          });
+          console.log(
+            "He got " + leg1Array + " rebounds in his last 15 games."
+          );
+        }
+        if ($("#leg1StatCategory").val() === "assists") {
+          var games = data.data
+            .filter((game) => game.ast !== null) // Filter out games with null assists.
+            .filter((game) => game.ast !== 0) // Filter out games with 0 assists.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            leg1Array.push(game.ast);
+          });
+          console.log("He got " + leg1Array + " assists in his last 15 games.");
+        }
       })
   );
 }
@@ -108,47 +122,50 @@ function getlast15games() {
 // Sets the value of compareValue to the user input in Stat Value.
 function setCompareValue() {
   compareValue = $("#leg1StatValue").val();
-  console.log(`compareValue is set to ${compareValue}.`);
-}
-
-// Sets the comparison symbol to the user input in Over/Under Value.
-function setComparison() {
-  if ($("#leg1Comparison").val() == "over") {
-    comparison = ">";
-  } else {
-    comparison = "<";
-  }
-  console.log(`comparison is set to ${comparison}`);
+  console.log(`The chosen spread value is set to ${compareValue}.`);
 }
 
 // Calculate the percentage of satisfying values
 function calculatePercentTruthy() {
-  // Calculate the number of values in leg1PointsArray that satisfy the condition
-  let satisfyingValues = leg1PointsArray.filter((value) => {
-    if (comparison === ">") {
+  // Calculate the number of values in leg1Array that satisfy the condition
+  let satisfyingValues = leg1Array.filter((value) => {
+    if ($("#leg1Comparison").val() == "over") {
+      console.log("Let's check what percent is over.");
       return value > compareValue;
     } else {
+      console.log("Let's check what percent is under.");
       return value < compareValue;
     }
   });
-  const percentTruthy =
-    (satisfyingValues.length / leg1PointsArray.length) * 100;
+  const percentTruthy = (satisfyingValues.length / leg1Array.length) * 100;
   return percentTruthy;
 }
 
-// Display the result in leg1Result
-function displayPercent(percentTruthy) {
-  $("#leg1Result").text(`${percentTruthy.toFixed(2)}%`);
+// Display the result in legResult for the given leg
+function displayPercent(percentTruthy, leg) {
+  console.log(`It's ${percentTruthy}% for leg ${leg}.`);
+  $(`#leg${leg}Result`).text(`${percentTruthy.toFixed(2)}%`);
 }
 
-// When Leg 1 Result Button is clicked run many functions to return the percent of times a player has beat the chosen spread in their last 15 games.
-$("#leg1ResultBtn").on("click", async function () {
-  await getPlayerId();
-  checkPlayer();
-  await getlast15games();
-  setCompareValue();
-  setComparison();
-  calculatePercentTruthy();
-  let percentTruthy = calculatePercentTruthy();
-  displayPercent(percentTruthy);
+// Event listener for Result Button for each leg
+for (let i = 1; i <= 6; i++) {
+  $(`#leg${i}ResultBtn`).on("click", async function () {
+    await getPlayerId();
+    checkPlayer();
+    await getlast15games();
+    setCompareValue();
+    let percentTruthy = calculatePercentTruthy();
+    displayPercent(percentTruthy, i);
+  });
+}
+
+//! All of this was necessary due to time zone issues causing date to appear as 1 day previous. It was only needed for testing if getting the most recent games was working. Leaving in in case it needs to be tested again. This was in the getlast15games function.
+/*
+var parsedDate = Date.parse(game.game.date);
+var date = new Date(parsedDate).toLocaleDateString(undefined, {
+  year: "numeric",
+  day: "2-digit",
+  timeZone: "UTC",
 });
+console.log(`Game ${index + 1}: Date: ${date}, Points: ${game.pts}`);
+*/
