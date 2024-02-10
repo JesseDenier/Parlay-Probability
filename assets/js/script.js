@@ -1,7 +1,22 @@
 // Establishes default variables that can be changed later.
-let playerId;
-let compareValue;
-var leg1Array = [];
+let leg1playerId;
+let leg2playerId;
+let leg3playerId;
+let leg4playerId;
+let leg5playerId;
+let leg6playerId;
+let leg1compareValue;
+let leg2compareValue;
+let leg3compareValue;
+let leg4compareValue;
+let leg5compareValue;
+let leg6compareValue;
+let leg1Array = [];
+let leg2Array = [];
+let leg3Array = [];
+let leg4Array = [];
+let leg5Array = [];
+let leg6Array = [];
 
 // Toggle visibility based on the "In Use" selection for each leg.
 for (let i = 1; i <= 6; i++) {
@@ -43,9 +58,9 @@ function getPlayerId() {
       // TODO: Make it so var playerID can be referenced by other functions.
       .then(function (data) {
         if (data.data.length > 0) {
-          playerId = data.data[0].id;
+          leg1playerId = data.data[0].id;
           console.log(
-            `The playerId is set to ${playerId} for ${firstName} ${lastName}.`
+            `The playerId is set to ${leg1playerId} for ${firstName} ${lastName}.`
           );
         } else {
           alert(`No player found for ${firstName} ${lastName}`);
@@ -57,7 +72,7 @@ function getPlayerId() {
 
 // Alerts the user if they haven't entered a player name.
 function checkPlayer() {
-  if (playerId === undefined) {
+  if (leg1playerId === undefined) {
     alert("A player must be entered into Player Name.");
     return;
   }
@@ -70,7 +85,7 @@ function checkPlayer() {
 function getlast15games() {
   return (
     fetch(
-      `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${playerId}`
+      `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${leg1playerId}`
     )
       // Creates a JSON file of the data.
       .then(function (response) {
@@ -121,8 +136,8 @@ function getlast15games() {
 
 // Sets the value of compareValue to the user input in Stat Value.
 function setCompareValue() {
-  compareValue = $("#leg1StatValue").val();
-  console.log(`The chosen spread value is set to ${compareValue}.`);
+  leg1compareValue = $("#leg1StatValue").val();
+  console.log(`The chosen spread value is set to ${leg1compareValue}.`);
 }
 
 // Calculate the percentage of satisfying values
@@ -131,10 +146,10 @@ function calculatePercentTruthy() {
   let satisfyingValues = leg1Array.filter((value) => {
     if ($("#leg1Comparison").val() == "over") {
       console.log("Let's check what percent is over.");
-      return value > compareValue;
+      return value > leg1compareValue;
     } else {
       console.log("Let's check what percent is under.");
-      return value < compareValue;
+      return value < leg1compareValue;
     }
   });
   const percentTruthy = (satisfyingValues.length / leg1Array.length) * 100;
@@ -142,9 +157,9 @@ function calculatePercentTruthy() {
 }
 
 // Display the result in legResult for the given leg
-function displayPercent(percentTruthy, leg) {
-  console.log(`It's ${percentTruthy}% for leg ${leg}.`);
-  $(`#leg${leg}Result`).text(`${percentTruthy.toFixed(2)}%`);
+function displayPercent(percentTruthy, i) {
+  console.log(`It's ${percentTruthy}% for leg ${i}.`);
+  $(`#leg${i}Result`).text(`${percentTruthy.toFixed(2)}%`);
 }
 
 // Event listener for Result Button for each leg
