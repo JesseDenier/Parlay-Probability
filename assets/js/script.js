@@ -1,42 +1,27 @@
 // Establishes default variables that can be changed later.
-let leg1playerId;
-let leg2playerId;
-let leg3playerId;
-let leg4playerId;
-let leg5playerId;
-let leg6playerId;
-let leg1compareValue;
-let leg2compareValue;
-let leg3compareValue;
-let leg4compareValue;
-let leg5compareValue;
-let leg6compareValue;
-let leg1Array = [];
-let leg2Array = [];
-let leg3Array = [];
-let leg4Array = [];
-let leg5Array = [];
-let leg6Array = [];
+let playerID;
+let compareValue;
+let legArray = [];
 
 // Toggle visibility based on the "In Use" selection for each leg.
-for (let i = 1; i <= 6; i++) {
-  $(`#leg${i}Use`).on("change", function () {
-    if ($(`#leg${i}Use`).val() === "noUse") {
-      $(`#leg${i}FormAfterUse`).hide();
-      $(`#leg${i}ResultBtn`).hide();
-      $(`#leg${i}Result`).hide();
+for (let legNumber = 1; legNumber <= 6; legNumber++) {
+  $(`#leg${legNumber}Use`).on("change", function () {
+    if ($(`#leg${legNumber}Use`).val() === "noUse") {
+      $(`#leg${legNumber}FormAfterUse`).hide();
+      $(`#leg${legNumber}ResultBtn`).hide();
+      $(`#leg${legNumber}Result`).hide();
     } else {
-      $(`#leg${i}FormAfterUse`).show();
-      $(`#leg${i}ResultBtn`).show();
-      $(`#leg${i}Result`).show();
+      $(`#leg${legNumber}FormAfterUse`).show();
+      $(`#leg${legNumber}ResultBtn`).show();
+      $(`#leg${legNumber}Result`).show();
     }
   });
 }
 
 // Discovers player ID by name inputed by user.
-function getPlayerId() {
+function getPlayerID(legNumber) {
   // Converts user input into first and last name strings ready for the parameter insertion.
-  var fullName = $("#leg1PlayerName").val();
+  var fullName = $("#leg" + legNumber + "PlayerName").val();
   var words = fullName.split(" ");
   if (words.length === 2) {
     var firstName = words[0];
@@ -55,12 +40,11 @@ function getPlayerId() {
         return response.json();
       })
       // Assigns player ID to var playerID and logs it to the console.
-      // TODO: Make it so var playerID can be referenced by other functions.
       .then(function (data) {
         if (data.data.length > 0) {
-          leg1playerId = data.data[0].id;
+          playerID = data.data[0].id;
           console.log(
-            `The playerId is set to ${leg1playerId} for ${firstName} ${lastName}.`
+            `Leg ${legNumber}'s playerID is set to ${playerID} for ${firstName} ${lastName}.`
           );
         } else {
           alert(`No player found for ${firstName} ${lastName}`);
@@ -72,7 +56,7 @@ function getPlayerId() {
 
 // Alerts the user if they haven't entered a player name.
 function checkPlayer() {
-  if (leg1playerId === undefined) {
+  if (playerID === undefined) {
     alert("A player must be entered into Player Name.");
     return;
   }
@@ -80,12 +64,12 @@ function checkPlayer() {
 
 // Discovers PPG for the last 15 games of a specific player.
 // Note: The end_date= parameter did not work at all so seasons had to be used.
-// TODO: Parameters seasons= and playerid= are static and need to be dynamic based on current/past year, and user inputs.
+// TODO: Parameters seasons= and playerID= are static and need to be dynamic based on current/past year, and user inputs.
 // TODO: Currently filtering out 0 point games but this may not be accurate. Chose to do so due to inaccurate 0 point games being returned by the API.
-function getlast15games() {
+function getlast15games(legNumber) {
   return (
     fetch(
-      `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${leg1playerId}`
+      `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${playerID}`
     )
       // Creates a JSON file of the data.
       .then(function (response) {
@@ -94,85 +78,111 @@ function getlast15games() {
       // Logs the most recent 15 PPG for player to Console.
       .then(function (data) {
         // Deletes any previous array held within.
-        leg1Array = [];
-        if ($("#leg1StatCategory").val() === "points") {
+        legArray = [];
+        if ($("#leg" + legNumber + "StatCategory").val() === "points") {
           var games = data.data
             .filter((game) => game.pts !== null) // Filter out games with null points.
             .filter((game) => game.pts !== 0) // Filter out games with 0 points.
             .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
             .slice(0, 15); // Takes the first 15 games after sorting.
           games.forEach(function (game, index) {
-            leg1Array.push(game.pts);
+            legArray.push(game.pts);
           });
-          console.log("He got " + leg1Array + " points in his last 15 games.");
+          console.log("He got " + legArray + " points in his last 15 games.");
         }
-        if ($("#leg1StatCategory").val() === "rebounds") {
+        if ($("#leg" + legNumber + "StatCategory").val() === "rebounds") {
           var games = data.data
             .filter((game) => game.reb !== null) // Filter out games with null rebounds.
             .filter((game) => game.reb !== 0) // Filter out games with 0 rebounds.
             .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
             .slice(0, 15); // Takes the first 15 games after sorting.
           games.forEach(function (game, index) {
-            leg1Array.push(game.reb);
+            legArray.push(game.reb);
           });
-          console.log(
-            "He got " + leg1Array + " rebounds in his last 15 games."
-          );
+          console.log("He got " + legArray + " rebounds in his last 15 games.");
         }
-        if ($("#leg1StatCategory").val() === "assists") {
+        if ($("#leg" + legNumber + "StatCategory").val() === "assists") {
           var games = data.data
             .filter((game) => game.ast !== null) // Filter out games with null assists.
             .filter((game) => game.ast !== 0) // Filter out games with 0 assists.
             .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
             .slice(0, 15); // Takes the first 15 games after sorting.
           games.forEach(function (game, index) {
-            leg1Array.push(game.ast);
+            legArray.push(game.ast);
           });
-          console.log("He got " + leg1Array + " assists in his last 15 games.");
+          console.log("He got " + legArray + " assists in his last 15 games.");
         }
       })
   );
 }
 
 // Sets the value of compareValue to the user input in Stat Value.
-function setCompareValue() {
-  leg1compareValue = $("#leg1StatValue").val();
-  console.log(`The chosen spread value is set to ${leg1compareValue}.`);
+function setCompareValue(legNumber) {
+  compareValue = $("#leg" + legNumber + "StatValue").val();
+  console.log(
+    "The chosen spread value for Leg " +
+      legNumber +
+      " is set to " +
+      compareValue +
+      "."
+  );
 }
 
 // Calculate the percentage of satisfying values
-function calculatePercentTruthy() {
-  // Calculate the number of values in leg1Array that satisfy the condition
-  let satisfyingValues = leg1Array.filter((value) => {
-    if ($("#leg1Comparison").val() == "over") {
-      console.log("Let's check what percent is over.");
-      return value > leg1compareValue;
+function calculatePercentTruthy(legNumber) {
+  // Calculate the number of values in the legArray that satisfy the condition
+  let satisfyingValues = legArray.filter((value) => {
+    if ($("#leg" + legNumber + "Comparison").val() == "over") {
+      return value > compareValue;
     } else {
-      console.log("Let's check what percent is under.");
-      return value < leg1compareValue;
+      return value < compareValue;
     }
   });
-  const percentTruthy = (satisfyingValues.length / leg1Array.length) * 100;
+  const percentTruthy = (satisfyingValues.length / legArray.length) * 100;
   return percentTruthy;
 }
 
 // Display the result in legResult for the given leg
-function displayPercent(percentTruthy, i) {
-  console.log(`It's ${percentTruthy}% for leg ${i}.`);
-  $(`#leg${i}Result`).text(`${percentTruthy.toFixed(2)}%`);
+function displayPercent(percentTruthy, legNumber) {
+  console.log(`It's ${percentTruthy}% for leg ${legNumber}.`);
+  $(`#leg${legNumber}Result`).text(`${percentTruthy.toFixed(2)}%`);
 }
 
 // Event listener for Result Button for each leg
-for (let i = 1; i <= 6; i++) {
-  $(`#leg${i}ResultBtn`).on("click", async function () {
-    await getPlayerId();
+for (let legNumber = 1; legNumber <= 6; legNumber++) {
+  $(`#leg${legNumber}ResultBtn`).on("click", async function () {
+    await getPlayerID(legNumber);
     checkPlayer();
-    await getlast15games();
-    setCompareValue();
-    let percentTruthy = calculatePercentTruthy();
-    displayPercent(percentTruthy, i);
+    await getlast15games(legNumber);
+    setCompareValue(legNumber);
+    let percentTruthy = calculatePercentTruthy(legNumber);
+    displayPercent(percentTruthy, legNumber);
   });
 }
+
+// Function to calculate the total percentage
+function calculateTotalPercentage() {
+  // Initialize total percentage
+  let totalPercentage = 1;
+  // Iterate through all the visible legs
+  for (let legNumber = 1; legNumber <= 6; legNumber++) {
+    // Check if the leg is visible
+    if ($(`#leg${legNumber}FormAfterUse`).is(":visible")) {
+      // Get the percentage for the current leg
+      let legPercentage = parseFloat($(`#leg${legNumber}Result`).text());
+      // Multiply the total percentage by the current leg's percentage
+      totalPercentage *= legPercentage / 100;
+    }
+  }
+  // Convert total percentage to percentage format and display it
+  let formattedTotalPercentage = (totalPercentage * 100).toFixed(2);
+  $("#totalResult").text(`${formattedTotalPercentage}%`);
+}
+
+// Attach click event to totalResultBtn
+$("#totalResultBtn").on("click", function () {
+  calculateTotalPercentage();
+});
 
 //! All of this was necessary due to time zone issues causing date to appear as 1 day previous. It was only needed for testing if getting the most recent games was working. Leaving in in case it needs to be tested again. This was in the getlast15games function.
 /*
