@@ -1,9 +1,9 @@
-// Establishes default variables that can be changed later.
+// Establishes empty default variables.
 let playerID;
 let compareValue;
 let legArray = [];
 
-// Toggle visibility based on the "In Use" selection for each leg.
+// Toggles visibility based on the "In Use" selection for each leg.
 for (let legNumber = 1; legNumber <= 6; legNumber++) {
   $(`#leg${legNumber}Use`).on("change", function () {
     if ($(`#leg${legNumber}Use`).val() === "noUse") {
@@ -18,9 +18,9 @@ for (let legNumber = 1; legNumber <= 6; legNumber++) {
   });
 }
 
-// Discovers player ID by name inputed by user.
+// Discovers playerID by name inputed by user.
 function getPlayerID(legNumber) {
-  // Converts user input into first and last name strings ready for the parameter insertion.
+  // Converts user input into first and last name strings ready for parameter insertion.
   var fullName = $("#leg" + legNumber + "PlayerName").val();
   var words = fullName.split(" ");
   if (words.length === 2) {
@@ -47,22 +47,28 @@ function getPlayerID(legNumber) {
             `Leg ${legNumber}'s playerID is set to ${playerID} for ${firstName} ${lastName}.`
           );
         } else {
-          alert(`No player found for ${firstName} ${lastName}`);
+          alert(
+            `Sorry no player was found with player found for ${firstName} ${lastName}`
+          );
           return;
         }
       })
   );
 }
 
-// Alerts the user if they haven't entered a player name.
-function checkPlayer() {
-  if (playerID === undefined) {
-    alert("A player must be entered into Player Name.");
-    return;
+// Checks if the user entered a player name and stat value.
+function checkSelections(legNumber) {
+  if ($("#leg" + legNumber + "PlayerName").val() === "") {
+    alert("Leg " + legNumber + " has no player selected.");
+    location.reload();
+  }
+  if ($("#leg" + legNumber + "StatValue").val() === 0) {
+    alert("Leg " + legNumber + " has no stat value selected.");
+    location.reload();
   }
 }
 
-// Discovers PPG for the last 15 games of a specific player.
+// Discovers stats for the last 15 games of a specific player.
 // Note: The end_date= parameter did not work at all so seasons had to be used.
 // TODO: Parameters seasons= and playerID= are static and need to be dynamic based on current/past year, and user inputs.
 // TODO: Currently filtering out 0 point games but this may not be accurate. Chose to do so due to inaccurate 0 point games being returned by the API.
@@ -88,7 +94,15 @@ function getlast15games(legNumber) {
           games.forEach(function (game, index) {
             legArray.push(game.pts);
           });
-          console.log("He got " + legArray + " points in his last 15 games.");
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " points in his last 15 games."
+          );
         }
         if ($("#leg" + legNumber + "StatCategory").val() === "rebounds") {
           var games = data.data
@@ -99,7 +113,15 @@ function getlast15games(legNumber) {
           games.forEach(function (game, index) {
             legArray.push(game.reb);
           });
-          console.log("He got " + legArray + " rebounds in his last 15 games.");
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " rebounds in his last 15 games."
+          );
         }
         if ($("#leg" + legNumber + "StatCategory").val() === "assists") {
           var games = data.data
@@ -110,7 +132,15 @@ function getlast15games(legNumber) {
           games.forEach(function (game, index) {
             legArray.push(game.ast);
           });
-          console.log("He got " + legArray + " assists in his last 15 games.");
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " assists in his last 15 games."
+          );
         }
       })
   );
@@ -119,13 +149,6 @@ function getlast15games(legNumber) {
 // Sets the value of compareValue to the user input in Stat Value.
 function setCompareValue(legNumber) {
   compareValue = $("#leg" + legNumber + "StatValue").val();
-  console.log(
-    "The chosen spread value for Leg " +
-      legNumber +
-      " is set to " +
-      compareValue +
-      "."
-  );
 }
 
 // Calculate the percentage of satisfying values
@@ -144,15 +167,14 @@ function calculatePercentTruthy(legNumber) {
 
 // Display the result in legResult for the given leg
 function displayPercent(percentTruthy, legNumber) {
-  console.log(`It's ${percentTruthy}% for leg ${legNumber}.`);
   $(`#leg${legNumber}Result`).text(`${percentTruthy.toFixed(2)}%`);
 }
 
 // Event listener for Result Button for each leg
 for (let legNumber = 1; legNumber <= 6; legNumber++) {
   $(`#leg${legNumber}ResultBtn`).on("click", async function () {
+    checkSelections(legNumber);
     await getPlayerID(legNumber);
-    checkPlayer();
     await getlast15games(legNumber);
     setCompareValue(legNumber);
     let percentTruthy = calculatePercentTruthy(legNumber);
@@ -195,8 +217,8 @@ $("#totalResultBtn").on("click", async function () {
   for (let legNumber = 1; legNumber <= 6; legNumber++) {
     // Check if the leg is visible
     if ($(`#leg${legNumber}FormAfterUse`).is(":visible")) {
+      checkSelections(legNumber);
       await getPlayerID(legNumber);
-      checkPlayer();
       await getlast15games(legNumber);
       setCompareValue(legNumber);
       let percentTruthy = calculatePercentTruthy(legNumber);
