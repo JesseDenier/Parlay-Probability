@@ -177,6 +177,17 @@ function calculateTotalPercentage() {
   // Convert total percentage to percentage format and display it
   let formattedTotalPercentage = (totalPercentage * 100).toFixed(2);
   $("#totalResult").text(`${formattedTotalPercentage}%`);
+
+  $("#finalThought").empty();
+  let formattedMinimumPayout = (100 / formattedTotalPercentage).toFixed(2);
+  const finalThought = $("<h2>")
+    .addClass("text-center")
+    .text(
+      "That's a good bet if the payout is more than " +
+        formattedMinimumPayout +
+        "X."
+    );
+  $("#finalThought").append(finalThought);
 }
 
 // Attach click event to totalResultBtn
