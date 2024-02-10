@@ -191,7 +191,18 @@ function calculateTotalPercentage() {
 }
 
 // Attach click event to totalResultBtn
-$("#totalResultBtn").on("click", function () {
+$("#totalResultBtn").on("click", async function () {
+  for (let legNumber = 1; legNumber <= 6; legNumber++) {
+    // Check if the leg is visible
+    if ($(`#leg${legNumber}FormAfterUse`).is(":visible")) {
+      await getPlayerID(legNumber);
+      checkPlayer();
+      await getlast15games(legNumber);
+      setCompareValue(legNumber);
+      let percentTruthy = calculatePercentTruthy(legNumber);
+      displayPercent(percentTruthy, legNumber);
+    }
+  }
   calculateTotalPercentage();
 });
 
