@@ -1,3 +1,5 @@
+const apiKey = "c3f07d6f-281b-424a-9b17-3446652e7cc4";
+
 // Establishes empty default variables.
 let playerID;
 let compareValue;
@@ -33,7 +35,12 @@ function getPlayerID(legNumber) {
   // Fetches the BallDon'tLie ID Search API.
   return (
     fetch(
-      `https://www.balldontlie.io/api/v1/players?search=${firstName} ${lastName}`
+      `https://api.balldontlie.io/v1/players?first_name=${firstName}&last_name=${lastName}`,
+      {
+        headers: {
+          'Authorization': apiKey
+        },
+      }
     )
       // Creates a JSON file of the data.
       .then(function (response) {
@@ -75,7 +82,12 @@ function checkSelections(legNumber) {
 function getlast15games(legNumber) {
   return (
     fetch(
-      `https://www.balldontlie.io/api/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${playerID}`
+      `https://api.balldontlie.io/v1/stats?per_page=100&seasons[]=2023&player_ids[]=${playerID}`,
+      {
+        headers: {
+          Authorization: apiKey,
+        },
+      }
     )
       // Creates a JSON file of the data.
       .then(function (response) {
