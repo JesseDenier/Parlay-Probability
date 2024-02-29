@@ -38,7 +38,7 @@ function getPlayerID(legNumber) {
       `https://api.balldontlie.io/v1/players?first_name=${firstName}&last_name=${lastName}`,
       {
         headers: {
-          'Authorization': apiKey
+          Authorization: apiKey,
         },
       }
     )
@@ -152,6 +152,97 @@ function getlast15games(legNumber) {
               " and " +
               legArray[14] +
               " assists in his last 15 games."
+          );
+        }
+        if (
+          $("#leg" + legNumber + "StatCategory").val() === "reboundsassists"
+        ) {
+          var games = data.data
+            .filter((game) => game.reb !== null) // Filter out games with null rebounds.
+            .filter((game) => game.reb !== 0) // Filter out games with 0 rebounds.
+            .filter((game) => game.ast !== null) // Filter out games with null assists.
+            .filter((game) => game.ast !== 0) // Filter out games with 0 assists.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            legArray.push(game.reb + game.ast);
+          });
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " rebounds and assists in his last 15 games."
+          );
+        }
+        if ($("#leg" + legNumber + "StatCategory").val() === "pointsrebounds") {
+          var games = data.data
+            .filter((game) => game.pts !== null) // Filter out games with null points.
+            .filter((game) => game.pts !== 0) // Filter out games with 0 points.
+            .filter((game) => game.reb !== null) // Filter out games with null rebounds.
+            .filter((game) => game.reb !== 0) // Filter out games with 0 rebounds.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            legArray.push(game.pts + game.reb);
+          });
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " points and rebounds in his last 15 games."
+          );
+        }
+        if ($("#leg" + legNumber + "StatCategory").val() === "pointsassists") {
+          var games = data.data
+            .filter((game) => game.pts !== null) // Filter out games with null points.
+            .filter((game) => game.pts !== 0) // Filter out games with 0 points.
+            .filter((game) => game.ast !== null) // Filter out games with null assists.
+            .filter((game) => game.ast !== 0) // Filter out games with 0 assists.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            legArray.push(game.pts + game.ast);
+          });
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " points and assists in his last 15 games."
+          );
+        }
+        if (
+          $("#leg" + legNumber + "StatCategory").val() ===
+          "pointsreboundsassists"
+        ) {
+          var games = data.data
+            .filter((game) => game.pts !== null) // Filter out games with null points.
+            .filter((game) => game.pts !== 0) // Filter out games with 0 points.
+            .filter((game) => game.reb !== null) // Filter out games with null rebounds.
+            .filter((game) => game.reb !== 0) // Filter out games with 0 rebounds.
+            .filter((game) => game.ast !== null) // Filter out games with null assists.
+            .filter((game) => game.ast !== 0) // Filter out games with 0 assists.
+            .sort((a, b) => new Date(b.game.date) - new Date(a.game.date)) // Sorts games by date
+            .slice(0, 15); // Takes the first 15 games after sorting.
+          games.forEach(function (game, index) {
+            legArray.push(game.pts + game.reb + game.ast);
+          });
+          console.log(
+            "Player " +
+              playerID +
+              " got " +
+              legArray.slice(0, 14) +
+              " and " +
+              legArray[14] +
+              " points rebounds and assists in his last 15 games."
           );
         }
       })
