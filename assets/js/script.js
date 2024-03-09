@@ -8,7 +8,7 @@ let legArray = [];
 // Toggles visibility based on the "In Use" selection for each leg.
 for (let legNumber = 1; legNumber <= 6; legNumber++) {
   $(`#leg${legNumber}Use`).on("change", function () {
-    if ($(`#leg${legNumber}Use`).val() === "noUse") {
+    if ($(`#leg${legNumber}Use`).val() === `noUse${legNumber}`) {
       $(`#leg${legNumber}FormAfterUse`).hide();
       $(`#leg${legNumber}ResultBtn`).hide();
       $(`#leg${legNumber}Result`).hide();
