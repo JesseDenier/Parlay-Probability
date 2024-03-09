@@ -330,14 +330,3 @@ $("#totalResultBtn").on("click", async function () {
   }
   calculateTotalPercentage();
 });
-
-//! All of this was necessary due to time zone issues causing date to appear as 1 day previous. It was only needed for testing if getting the most recent games was working. Leaving in in case it needs to be tested again. This was in the getlast15games function.
-/*
-var parsedDate = Date.parse(game.game.date);
-var date = new Date(parsedDate).toLocaleDateString(undefined, {
-  year: "numeric",
-  day: "2-digit",
-  timeZone: "UTC",
-});
-console.log(`Game ${index + 1}: Date: ${date}, Points: ${game.pts}`);
-*/
