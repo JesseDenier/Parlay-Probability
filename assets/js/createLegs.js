@@ -1,5 +1,5 @@
 function createLeg(legNumber) {
-  // Create section element
+  // Create section element.
   const section = document.createElement("section");
   section.classList.add(
     "col-6",
@@ -10,16 +10,16 @@ function createLeg(legNumber) {
     "pt-2"
   );
 
-  // Create heading element
+  // Create heading element.
   const heading = document.createElement("h2");
   heading.classList.add("text-center");
   heading.textContent = `Leg ${legNumber}`;
 
-  // Create form element
+  // Create form element.
   const form = document.createElement("form");
   form.id = `leg${legNumber}Form`;
 
-  // Create "In Use" label and select element
+  // Create "In Use" label and select element.
   const inUseLabel = document.createElement("label");
   inUseLabel.setAttribute("for", `leg${legNumber}Use`);
   inUseLabel.textContent = "In Use:";
@@ -29,7 +29,7 @@ function createLeg(legNumber) {
   inUseSelect.id = `leg${legNumber}Use`;
   inUseSelect.setAttribute("required", "");
 
-  // Create options for the select element
+  // Create options for the select element.
   const yesOption = document.createElement("option");
   yesOption.value = `yesUse${legNumber}`;
   yesOption.textContent = "Yes";
@@ -41,15 +41,15 @@ function createLeg(legNumber) {
   inUseSelect.appendChild(yesOption);
   inUseSelect.appendChild(noOption);
 
-  // Append "In Use" label and select element to form
+  // Append "In Use" label and select element to form.
   form.appendChild(inUseLabel);
   form.appendChild(inUseSelect);
 
-  // Create div element for form elements after "In Use"
+  // Create div element for form elements after "In Use".
   const formAfterUseDiv = document.createElement("div");
   formAfterUseDiv.id = `leg${legNumber}FormAfterUse`;
 
-  // Create Player Name label and input element
+  // Create Player Name label and input element.
   const playerNameLabel = document.createElement("label");
   playerNameLabel.setAttribute("for", `leg${legNumber}PlayerName`);
   playerNameLabel.classList.add("pt-3");
@@ -62,11 +62,11 @@ function createLeg(legNumber) {
   playerNameInput.placeholder = "First Last";
   playerNameInput.setAttribute("required", "");
 
-  // Append Player Name label and input element to form after "In Use"
+  // Append Player Name label and input element to form after "In Use".
   formAfterUseDiv.appendChild(playerNameLabel);
   formAfterUseDiv.appendChild(playerNameInput);
 
-  // Create Stat Category label and select element
+  // Create Stat Category label and select element.
   const statCategoryLabel = document.createElement("label");
   statCategoryLabel.setAttribute("for", `leg${legNumber}StatCategory`);
   statCategoryLabel.classList.add("pt-3");
@@ -77,7 +77,7 @@ function createLeg(legNumber) {
   statCategorySelect.id = `leg${legNumber}StatCategory`;
   statCategorySelect.setAttribute("required", "");
 
-  // Create options for the select element
+  // Create options for the select element.
   const pointsOption = document.createElement("option");
   pointsOption.value = "points";
   pointsOption.textContent = "Points";
@@ -114,11 +114,11 @@ function createLeg(legNumber) {
   statCategorySelect.appendChild(reboundsAssistsOption);
   statCategorySelect.appendChild(pointsReboundsAssistsOption);
 
-  // Append Stat Category label and select element to formAfterUseDiv
+  // Append Stat Category label and select element to formAfterUseDiv.
   formAfterUseDiv.appendChild(statCategoryLabel);
   formAfterUseDiv.appendChild(statCategorySelect);
 
-  // Create Stat Value label and input element
+  // Create Stat Value label and input element.
   const statValueLabel = document.createElement("label");
   statValueLabel.setAttribute("for", `leg${legNumber}StatValue`);
   statValueLabel.classList.add("pt-3");
@@ -131,11 +131,11 @@ function createLeg(legNumber) {
   statValueInput.value = "0";
   statValueInput.setAttribute("required", "");
 
-  // Append Stat Value label and input element to formAfterUseDiv
+  // Append Stat Value label and input element to formAfterUseDiv.
   formAfterUseDiv.appendChild(statValueLabel);
   formAfterUseDiv.appendChild(statValueInput);
 
-  // Create Comparison label and select element
+  // Create Comparison label and select element.
   const comparisonLabel = document.createElement("label");
   comparisonLabel.setAttribute("for", `leg${legNumber}Comparison`);
   comparisonLabel.classList.add("pt-3");
@@ -146,7 +146,7 @@ function createLeg(legNumber) {
   comparisonSelect.id = `leg${legNumber}Comparison`;
   comparisonSelect.setAttribute("required", "");
 
-  // Create options for the select element
+  // Create options for the select element.
   const overOption = document.createElement("option");
   overOption.value = "over";
   overOption.textContent = "Over";
@@ -158,27 +158,27 @@ function createLeg(legNumber) {
   comparisonSelect.appendChild(overOption);
   comparisonSelect.appendChild(underOption);
 
-  // Append Comparison label and select element to formAfterUseDiv
+  // Append Comparison label and select element to formAfterUseDiv.
   formAfterUseDiv.appendChild(comparisonLabel);
   formAfterUseDiv.appendChild(comparisonSelect);
 
-  // Append formAfterUseDiv to form
+  // Append formAfterUseDiv to form.
   form.appendChild(formAfterUseDiv);
 
-  // Create "Calculate Percentage" button
+  // Create "Calculate Percentage" button.
   const resultButton = document.createElement("button");
   resultButton.type = "button";
   resultButton.classList.add("mt-3", "btn", "btn-primary");
   resultButton.id = `leg${legNumber}ResultBtn`;
   resultButton.textContent = "Calculate Percentage";
 
-  // Create result div
+  // Create result div.
   const resultDiv = document.createElement("div");
   resultDiv.classList.add("text-center", "card", "my-3", "text-bg-light");
   resultDiv.id = `leg${legNumber}Result`;
   resultDiv.textContent = "Result";
 
-  // Append all elements to the section
+  // Append all elements to the section.
   section.appendChild(heading);
   section.appendChild(form);
   section.appendChild(resultButton);
@@ -187,8 +187,8 @@ function createLeg(legNumber) {
   return section;
 }
 
-// Append multiple legs
-const legs = document.getElementById("legs"); // Replace 'parentElementId' with the actual ID of the parent element
+// Append multiple legs.
+const legs = document.getElementById("legs");
 
 for (let i = 1; i <= 6; i++) {
   const leg = createLeg(i);
